@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -49,9 +50,10 @@ class Offer extends Resource
     {
         return [
             ID::make()->sortable()->hideFromIndex(),
-            Text::make('名稱', 'name'),
-            Text::make('價格', 'price'),
-            Textarea::make('描述', 'description'),
+            Text::make('名稱', 'name')->required(),
+            Text::make('價格', 'price')->required(),
+            Textarea::make('描述', 'description')->nullable(),
+            DateTime::make('最後報名期限', 'priceValidUntil')->nullable(),
 
             BelongsTo::make('營隊', 'camp', Camp::class),
         ];
