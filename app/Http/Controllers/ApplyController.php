@@ -55,6 +55,11 @@ class ApplyController extends Controller {
                 $group->camp_id = $request->camp_id;
                 $group->save();
                 $apply->group()->associate($group->id);
+                $apply->save();
+                return response()->json([
+                    'message' => 'success',
+                    'group_id' => $group->id
+                ]);
             } else {
                 abort(400, 'group_id or group_name is required');
             }
