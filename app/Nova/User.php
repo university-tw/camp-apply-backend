@@ -10,8 +10,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class User extends Resource
-{
+class User extends Resource {
     /**
      * The model the resource corresponds to.
      *
@@ -38,11 +37,10 @@ class User extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
-    {
+    public function fields(NovaRequest $request) {
         return [
             ID::make()->sortable(),
 
@@ -62,50 +60,51 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
+
+            Text::make('身分證字號', 'tw_id')->hideFromIndex(),
+            Text::make('家長手機', 'parent_phone')->hideFromIndex(),
+            Text::make('手機', 'phone')->hideFromIndex(),
+            Text::make('地址', 'address')->hideFromIndex(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
-    {
+    public function cards(NovaRequest $request) {
         return [];
     }
 
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
-    {
+    public function filters(NovaRequest $request) {
         return [];
     }
 
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
-    {
+    public function lenses(NovaRequest $request) {
         return [];
     }
 
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
-    {
+    public function actions(NovaRequest $request) {
         return [];
     }
 }

@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
-            $table->id();
+        Schema::create('groups', function (Blueprint $table) {
+            $table->ulid('id');
             $table->foreignId('camp_id');
-
-            $table->string('name');
-            $table->integer('price');
-            $table->text('description')->nullable();
-            $table->dateTime('priceValidUntil')->nullable();
-
-            $table->boolean('group')->default(false); // 是否為團體報名
-
+            $table->text('name');
             $table->timestamps();
         });
     }
@@ -35,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('groups');
     }
 };

@@ -21,17 +21,26 @@ class StoreApplyRequest extends FormRequest {
      */
     public function rules() {
         return [
-            # 身份驗證
-            'email' => 'required|email',
-            'password' => 'required',
+            'name' => 'nullable|string',
+            //'email' => 'required|email',
 
-            # 個人資料
-            'name' => 'required',
             'tw_id' => 'required|tw_id',
-            'address' => 'required',
 
-            # 手機
-            'phone' => 'required',
+            'phone' => 'required|string|starts_with:09|digits:10',
+            'parent_phone' => 'required|string|starts_with:09|digits:10',
+            'organization' => 'required|string',
+            'address' => 'required|string',
+
+            'bank_code' => 'required|string',
+            'bank_account' => 'required|string',
+            'bank_comment' => 'required|string',
+
+            'group_name' => 'unique:groups,name',
+            'group_id' => 'exists:groups,id',
+
+            'offer_id' => 'required|exists:App\Models\Offer,id',
+            'camp_id' => 'required|exists:App\Models\Camp,id',
+            'camp_time' => 'required|exists:App\Models\CampTime,id',
         ];
     }
 }

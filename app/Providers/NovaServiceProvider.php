@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
-class NovaServiceProvider extends NovaApplicationServiceProvider
-{
+class NovaServiceProvider extends NovaApplicationServiceProvider {
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
         parent::boot();
+        Nova::sortResourcesBy(function ($resource) {
+            return $resource::$priority ?? 99999;
+        });
     }
 
     /**
@@ -23,12 +24,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return void
      */
-    protected function routes()
-    {
+    protected function routes() {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**
@@ -38,8 +38,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return void
      */
-    protected function gate()
-    {
+    protected function gate() {
         Gate::define('viewNova', function ($user) {
             return in_array($user->email, [
                 //
@@ -52,8 +51,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return array
      */
-    protected function dashboards()
-    {
+    protected function dashboards() {
         return [
             new \App\Nova\Dashboards\Main,
         ];
@@ -64,8 +62,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return array
      */
-    public function tools()
-    {
+    public function tools() {
         return [];
     }
 
@@ -74,8 +71,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         //
     }
 }

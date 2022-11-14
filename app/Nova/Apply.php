@@ -4,6 +4,8 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Text;
@@ -49,6 +51,15 @@ class Apply extends Resource {
 
             KeyValue::make('資料', 'data')->rules('array')->hideFromIndex(),
 
+            Text::make('銀行代碼', 'bank_code'),
+            Text::make('銀行帳號', 'bank_account'),
+            Text::make('轉帳備註', 'bank_comment')->hideFromIndex(),
+
+            Boolean::make('已付款', 'is_paid'),
+            DateTime::make('付款時間', 'paid_at')->hideFromIndex(),
+
+            BelongsTo::make('團隊', 'group', Group::class)->nullable(),
+            BelongsTo::make('營隊方案', 'offer', Offer::class),
             BelongsTo::make('營隊梯次', 'camp_time', CampTime::class),
             BelongsTo::make('用戶', 'user', User::class),
         ];

@@ -2,27 +2,23 @@
 
 namespace App\Nova;
 
-use App\Nova\Apply;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasManyThrough;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Camp extends Resource
+class Group extends Resource
 {
     public static function label() {
-        return '營隊';
+        return "團隊";
     }
-
-    public static $priority = 1;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Camp>
+     * @var class-string<\App\Models\Group>
      */
-    public static $model = \App\Models\Camp::class;
+    public static $model = \App\Models\Group::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -50,11 +46,8 @@ class Camp extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('營隊名稱', 'name')->required(),
 
-            HasMany::make('方案', 'offers', Offer::class),
-            HasMany::make('梯次', 'times', CampTime::class),
-            HasManyThrough::make('報名', 'applications', Apply::class),
+            Text::make('名稱', 'name')->required(),
         ];
     }
 

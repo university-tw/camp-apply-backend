@@ -14,6 +14,10 @@ class Camp extends Model {
         'name'
     ];
 
+    protected $with = [
+        'offers'
+    ];
+
     public function offers(): HasMany {
         return $this->hasMany(Offer::class);
     }

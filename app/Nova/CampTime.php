@@ -15,6 +15,7 @@ class CampTime extends Resource {
         return '營隊梯次';
     }
 
+    public static $priority = 2;
     /**
      * The model the resource corresponds to.
      *

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('camp_times', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('camp_id')->constrained('camps')->cascadeOnDelete();
+            $table->foreignId('camp_id');
             $table->string('name');
             $table->date('start');
             $table->date('end');

@@ -15,8 +15,16 @@ return new class extends Migration
     {
         Schema::create('applies', function (Blueprint $table) {
             $table->ulid('id');
-            $table->foreignId('camp_time_id')->constrained('camp_times')->cascadeOnDelete();
-            $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
+            $table->foreignId('camp_time_id');
+            $table->foreignId('offer_id');
+            $table->foreignId("user_id");
+            $table->foreignUlid('group_id')->nullable();
+
+            $table->string('bank_code')->nullable();
+            $table->string('bank_account')->nullable();
+            $table->string('bank_comment')->nullable();
+
+            $table->dateTime('paid_at')->nullable();
 
             $table->json('data');
 
