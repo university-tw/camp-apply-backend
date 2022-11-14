@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateApplyRequest;
 use App\Models\Apply;
 use App\Models\Offer;
 use App\Models\User;
+use App\Notifications\CampApplyNotice;
 use Illuminate\Http\Response;
 
 class ApplyController extends Controller {
@@ -56,6 +57,7 @@ class ApplyController extends Controller {
                 $group->save();
                 $apply->group()->associate($group->id);
                 $apply->save();
+                auth()->user()->notify(new CampApplyNotice($offer->camp, $group));
                 return response()->json([
                     'message' => 'success',
                     'group_id' => $group->id
@@ -66,7 +68,7 @@ class ApplyController extends Controller {
         }
 
         $apply->save();
-
+        auth()->user()->notify(new CampApplyNotice($offer->camp));
         return \response()->json([
             'message' => 'success',
         ]);
