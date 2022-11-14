@@ -57,7 +57,7 @@ class ApplyController extends Controller {
                 $group->save();
                 $apply->group()->associate($group->id);
                 $apply->save();
-                auth()->user()->notify(new CampApplyNotice($offer->camp, $group));
+                auth()->user()->notify(new CampApplyNotice($apply));
                 return response()->json([
                     'message' => 'success',
                     'group_id' => $group->id
@@ -68,7 +68,7 @@ class ApplyController extends Controller {
         }
 
         $apply->save();
-        auth()->user()->notify(new CampApplyNotice($offer->camp));
+        auth()->user()->notify(new CampApplyNotice($apply));
         return \response()->json([
             'message' => 'success',
         ]);
