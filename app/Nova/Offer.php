@@ -50,7 +50,7 @@ class Offer extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable()->hideFromIndex(),
+            ID::make()->sortable(),
             Text::make('名稱', 'name')->required(),
             Text::make('價格', 'price')->required(),
             Textarea::make('描述', 'description')->nullable(),
