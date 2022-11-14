@@ -47,13 +47,14 @@ class ApplyController extends Controller {
         $apply->bank_comment = $request->bank_comment;
 
         if ($offer->group) {
-            if($request->group_id) {
+            if ($request->group_id) {
                 $apply->group()->associate($request->group_id);
-            } else if($request->group_name) {
-                $apply->group()->create([
-                    'name' => $request->group_name,
-                    'camp_id' => $request->camp_id,
-                ]);
+            } else if ($request->group_name) {
+                $group = new \App\Models\Group();
+                $group->name = $request->group_name;
+                $group->camp_id = $request->camp_id;
+                $group->save();
+                $apply->group()->associate($group->id);
             } else {
                 abort(400, 'group_id or group_name is required');
             }
