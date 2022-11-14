@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('camp_times', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('camp_id')->constrained('camps')->cascadeOnDelete();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('tw_id')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('start');
+            $table->date('end');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('camp_times');
     }
 };

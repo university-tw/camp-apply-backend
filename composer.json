@@ -12,9 +12,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "hsuan1117/laravel-nova-cracker": "^1.2",
         "laravel/framework": "^9.19",
+        "laravel/nova": "~4.0",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "laravel/nova": "~4.0"
+        "meditate/twid": "^0.2.0"
     },
     "repositories": [
         {
