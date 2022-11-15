@@ -11,7 +11,8 @@ class Camp extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'description'
     ];
 
     protected $with = [
