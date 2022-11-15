@@ -11,6 +11,10 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class User extends Resource {
+    public static function label() {
+        return "用戶";
+    }
+
     /**
      * The model the resource corresponds to.
      *

@@ -50,18 +50,24 @@ class Apply extends Resource {
             ID::make()->sortable(),
 
             KeyValue::make('資料', 'data')->rules('array')->hideFromIndex(),
+            BelongsTo::make('用戶', 'user', User::class),
+            Boolean::make('已付款', 'is_paid'),
 
             Text::make('銀行代碼', 'bank_code'),
             Text::make('銀行帳號', 'bank_account'),
             Text::make('轉帳備註', 'bank_comment')->hideFromIndex(),
 
-            Boolean::make('已付款', 'is_paid'),
             DateTime::make('付款時間', 'paid_at')->hideFromIndex(),
 
-            BelongsTo::make('團隊', 'group', Group::class)->nullable(),
-            BelongsTo::make('營隊方案', 'offer', Offer::class),
-            BelongsTo::make('營隊梯次', 'camp_time', CampTime::class),
-            BelongsTo::make('用戶', 'user', User::class),
+            BelongsTo::make('團隊', 'group', Group::class)->nullable()->displayUsing(function ($group) {
+                return $group->name;
+            }),
+            BelongsTo::make('營隊梯次', 'camp_time', CampTime::class)->displayUsing(function ($camp_time) {
+                return $camp_time->camp->name . ' ' . $camp_time->name;
+            }),
+            BelongsTo::make('營隊方案', 'offer', Offer::class)->displayUsing(function ($offer) {
+                return $offer->name;
+            }),
         ];
     }
 
@@ -72,7 +78,9 @@ class Apply extends Resource {
      * @return array
      */
     public function cards(NovaRequest $request) {
-        return [];
+        return [
+            new Metrics\NewApplicants,
+        ];
     }
 
     /**
