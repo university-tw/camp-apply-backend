@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->text('description')->nullable();
             $table->dateTime('priceValidUntil')->nullable();
+            $table->integer('limit')->nullable(); // 限制報名人數
 
             $table->boolean('group')->default(false); // 是否為團體報名
 

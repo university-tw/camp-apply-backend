@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -53,6 +54,7 @@ class Offer extends Resource
             ID::make()->sortable(),
             Text::make('名稱', 'name')->required(),
             Text::make('價格', 'price')->required(),
+            Number::make('限制報名人數', 'limit')->nullable(),
             Textarea::make('描述', 'description')->nullable(),
             DateTime::make('最後報名期限', 'priceValidUntil')->nullable(),
             Boolean::make('團隊報名', 'group')->default(false),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreApplyRequest;
 use App\Http\Requests\UpdateApplyRequest;
 use App\Models\Apply;
+use App\Models\Group;
 use App\Models\Offer;
 use App\Models\User;
 use App\Notifications\CampApplyNotice;
@@ -51,7 +52,7 @@ class ApplyController extends Controller {
             if ($request->group_id) {
                 $apply->group()->associate($request->group_id);
             } else if ($request->group_name) {
-                $group = new \App\Models\Group();
+                $group = new Group();
                 $group->name = $request->group_name;
                 $group->camp_id = $request->camp_id;
                 $group->save();
@@ -65,6 +66,12 @@ class ApplyController extends Controller {
             } else {
                 abort(400, 'group_id or group_name is required');
             }
+        }
+
+        if ($offer->limit) {
+           if ($offer->limit <= $offer->applies()->count()) {
+               abort(400, '人數已滿');
+           }
         }
 
         $apply->save();

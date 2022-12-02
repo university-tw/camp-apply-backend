@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Camp;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UniversityTWCamps2023 extends Seeder {
@@ -39,7 +38,42 @@ class UniversityTWCamps2023 extends Seeder {
             [
                 'name' => '團報優惠',
                 'price' => 3600,
+                'group' => true,
+            ],
+        ]);
+        $camp = Camp::create([
+            'name' => '2023 Web開發挑戰營',
+            'description' => '2023 Web開發挑戰營',
+        ]);
+        $camp->times()->createMany([
+            [
+                'name' => '第一梯次',
+                'start' => '2023-02-06',
+                'end' => '2023-02-08',
+            ]
+        ]);
+        $camp->offers()->createMany([
+            [
+                'name' => '一般報名',
+                'price' => 7500,
                 'group' => false,
+            ],
+            [
+                'name' => '超早鳥優惠',
+                'price' => 5000,
+                'priceValidUntil' => '2022-12-15 23:59:59',
+                'group' => false,
+            ],
+            [
+                'name' => '限定優惠',
+                'price' => 3000,
+                'limit' => 10,
+                'group' => false,
+            ],
+            [
+                'name' => '團報優惠',
+                'price' => 4500,
+                'group' => true,
             ],
         ]);
     }
