@@ -21,29 +21,24 @@ class UniversityTWCamps2023 extends Seeder {
             [
                 'name' => '第一梯次',
                 'start' => '2023-01-30',
-                'end' => '2023-02-02',
-            ],
-            [
-                'name' => '第二梯次',
-                'start' => '2023-02-06',
-                'end' => '2023-02-09',
+                'end' => '2023-02-01',
             ]
         ]);
         $camp->offers()->createMany([
             [
                 'name' => '一般報名',
-                'price' => 9999,
+                'price' => 4799,
                 'group' => false,
             ],
             [
                 'name' => '超早鳥優惠',
-                'price' => 4999,
-                'priceValidUntil' => '2022-11-23 23:59:59',
+                'price' => 4000,
+                'priceValidUntil' => '2022-12-15 23:59:59',
                 'group' => false,
             ],
             [
                 'name' => '團報優惠',
-                'price' => 7500,
+                'price' => 3600,
                 'group' => false,
             ],
         ]);
