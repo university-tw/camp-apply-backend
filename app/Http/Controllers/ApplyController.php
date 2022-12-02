@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CampApply;
 use App\Http\Requests\StoreApplyRequest;
 use App\Http\Requests\UpdateApplyRequest;
 use App\Models\Apply;
@@ -69,13 +70,13 @@ class ApplyController extends Controller {
         }
 
         if ($offer->limit) {
-           if ($offer->limit <= $offer->applies()->count()) {
-               abort(400, '人數已滿');
-           }
+            if ($offer->limit <= $offer->applies()->count()) {
+                abort(400, '人數已滿');
+            }
         }
 
         $apply->save();
-        auth()->user()->notify(new CampApplyNotice($apply));
+        CampApply::dispatch(auth()->user(), $apply);
         return \response()->json([
             'message' => 'success',
         ]);
