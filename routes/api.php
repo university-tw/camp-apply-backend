@@ -33,3 +33,10 @@ Route::prefix('info')->group(function () {
         return $camp->load('times');
     });
 });
+
+Route::middleware('auth:sanctum')->prefix('/me')->group(function () {
+    // check if user applied a camp
+    Route::get('/applied/{camp}', function (\App\Models\Camp $camp) {
+        return $camp->applies()->where('user_id', auth()->user()->id)->exists();
+    });
+});

@@ -27,7 +27,7 @@ class Camp extends Model {
         return $this->hasMany(CampTime::class);
     }
 
-    public function applications(): HasManyThrough {
+    public function applies(): HasManyThrough {
         return $this->hasManyThrough(Apply::class, CampTime::class,);
     }
 }

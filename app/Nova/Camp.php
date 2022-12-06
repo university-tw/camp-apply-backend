@@ -54,7 +54,7 @@ class Camp extends Resource
 
             HasMany::make('方案', 'offers', Offer::class),
             HasMany::make('梯次', 'times', CampTime::class),
-            HasManyThrough::make('報名', 'applications', Apply::class),
+            HasManyThrough::make('報名', 'applies', Apply::class),
         ];
     }
 
