@@ -10,6 +10,10 @@ class BankAccount extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'name'
+    ];
+
     protected $fillable = [
         'name',
         'account',
