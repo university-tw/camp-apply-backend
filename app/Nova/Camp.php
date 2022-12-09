@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Apply;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
@@ -54,6 +55,7 @@ class Camp extends Resource
 
             HasMany::make('方案', 'offers', Offer::class),
             HasMany::make('梯次', 'times', CampTime::class),
+            BelongsToMany::make('銀行帳號', 'bank_accounts', BankAccount::class),
             HasManyThrough::make('報名', 'applies', Apply::class),
         ];
     }

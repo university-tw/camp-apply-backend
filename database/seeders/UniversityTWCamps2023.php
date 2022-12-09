@@ -41,6 +41,7 @@ class UniversityTWCamps2023 extends Seeder {
                 'group' => true,
             ],
         ]);
+        $camp->bank_accounts()->attach(1);
         $camp = Camp::create([
             'name' => '2023 Web開發挑戰營',
             'description' => '2023 Web開發挑戰營',
@@ -76,5 +77,6 @@ class UniversityTWCamps2023 extends Seeder {
                 'group' => true,
             ],
         ]);
+        $camp->bank_accounts()->attach(1);
     }
 }
