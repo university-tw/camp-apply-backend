@@ -26,6 +26,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "./packages/twid"
         }
     ],
     "require-dev": {
