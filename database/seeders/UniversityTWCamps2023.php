@@ -51,8 +51,8 @@ class UniversityTWCamps2023 extends Seeder
         $camp->times()->createMany([
             [
                 'name' => '第一梯次',
-                'start' => '2023-02-02',
-                'end' => '2023-02-04',
+                'start' => '2023-02-06',
+                'end' => '2023-02-08',
             ]
         ]);
         $camp->offers()->createMany([
@@ -87,8 +87,8 @@ class UniversityTWCamps2023 extends Seeder
         $camp->times()->createMany([
             [
                 'name' => '第一梯次',
-                'start' => '2023-02-06',
-                'end' => '2023-02-08',
+                'start' => '2023-02-02',
+                'end' => '2023-02-04',
             ]
         ]);
         $camp->offers()->createMany([
