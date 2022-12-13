@@ -15,7 +15,7 @@
         "laravel/nova": "~4.0",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "meditate/twid": "^0.2.0",
+        "meditate/twid": "@dev",
         "spatie/laravel-backup": "^8.1"
     },
     "repositories": [
