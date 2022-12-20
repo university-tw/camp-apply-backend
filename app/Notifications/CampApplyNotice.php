@@ -48,6 +48,7 @@ class CampApplyNotice extends Notification {
 
         $mail->line("若您尚未轉帳，請儘速依照您提供的帳戶資訊轉帳")
             ->line("請使用： (" . $this->apply->bank_code . ")" . $this->apply->bank_account . " 轉帳")
+            ->line("轉帳到： (" . $this->apply->camp_time->camp->bank_accounts->first->code . ")" . $this->apply->camp_time->camp->bank_accounts->first->account . " 轉帳")
             ->line("繳費金額： " . $this->apply->offer->price)
             ->line('')
             ->line('再次感謝您使用營隊報名平台');
