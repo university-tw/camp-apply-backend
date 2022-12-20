@@ -49,7 +49,7 @@ class Apply extends Resource {
         return [
             ID::make()->sortable(),
 
-            KeyValue::make('資料', 'data')->rules('array')->hideFromIndex(),
+            KeyValue::make('資料', 'data')->rules('array')->nullable()->hideFromIndex(),
             BelongsTo::make('用戶', 'user', User::class),
             Boolean::make('已付款', 'is_paid'),
 
