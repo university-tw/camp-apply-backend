@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ApplyType;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -94,7 +95,9 @@ class Apply extends Resource {
      * @return array
      */
     public function filters(NovaRequest $request) {
-        return [];
+        return [
+            ApplyType::make()
+        ];
     }
 
     /**
