@@ -30,9 +30,16 @@ class Apply extends Model {
         return $this->paid_at !== null;
     }
 
-    public function setIsPaidAttribute(): void {
-        $this->paid_at = now();
-        $this->status = 'paid';
+    public function setIsPaidAttribute($status): void {
+        if($status){
+            $this->paid_at = now();
+            $this->status = 'paid';
+        } else {
+            $this->paid_at = null;
+            if($this->status === 'paid'){
+                $this->status = 'pending';
+            }
+        }
     }
 
     public function camp_time(): BelongsTo {
