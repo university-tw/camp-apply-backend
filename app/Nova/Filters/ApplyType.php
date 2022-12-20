@@ -36,7 +36,7 @@ class ApplyType extends BooleanFilter
         return [
             '尚未繳費' => 'pending',
             '已繳費' => 'paid',
-            '已取消' => 'canceled',
+            '已取消' => 'cancelled',
         ];
     }
 
