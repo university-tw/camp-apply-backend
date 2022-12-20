@@ -54,7 +54,7 @@ class Apply extends Resource {
                 'pending' => '報名完成',
                 'paid' => '已付款',
                 'cancelled' => '已取消',
-            ]),
+            ])->displayUsingLabels(),
             Boolean::make('已付款', 'is_paid'),
 
             Text::make('銀行代碼', 'bank_code'),
