@@ -66,6 +66,7 @@ class User extends Resource {
                 ->updateRules('nullable', Rules\Password::defaults()),
 
             Text::make('身分證字號', 'tw_id')->hideFromIndex(),
+            Text::make('組織', 'organization')->hideFromIndex(),
             Text::make('家長手機', 'parent_phone')->hideFromIndex(),
             Text::make('手機', 'phone')->hideFromIndex(),
             Text::make('地址', 'address')->hideFromIndex(),
