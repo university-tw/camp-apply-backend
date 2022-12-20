@@ -21,7 +21,7 @@ class ApplyType extends BooleanFilter
     {
         $origin = collect(['pending', 'paid', 'cancelled']);
         $filter = $origin->filter(fn($item) => $value[$item] ?? false);
-
+        \Log::debug($origin->diff($filter)->values());
         return $query->whereNotIn('status', $origin->diff($filter)->values());
     }
 
