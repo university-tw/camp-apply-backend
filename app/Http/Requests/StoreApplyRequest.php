@@ -26,6 +26,8 @@ class StoreApplyRequest extends FormRequest {
 
             'tw_id' => 'required|tw_id',
 
+            'data' => 'nullable|array',
+
             'phone' => 'required|string|starts_with:09|digits:10',
             'parent_phone' => 'required|string|starts_with:09|digits:10',
             'organization' => 'required|string',

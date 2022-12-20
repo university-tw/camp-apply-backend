@@ -44,7 +44,7 @@ class ApplyController extends Controller {
         $apply->user_id = auth()->user()->id;
         $apply->camp_time()->associate($request->camp_time);
         $apply->offer()->associate($request->offer_id);
-        $apply->data = [];
+        $apply->data = $request->data ?? [];
         $apply->bank_account = $request->bank_account;
         $apply->bank_code = $request->bank_code;
         $apply->bank_comment = $request->bank_comment;
