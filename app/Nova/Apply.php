@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\KeyValue;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -49,13 +50,18 @@ class Apply extends Resource {
 
             KeyValue::make('資料', 'data')->nullable()->hideFromIndex(),
             BelongsTo::make('用戶', 'user', User::class),
+            Select::make('報名狀態', 'status')->options([
+                'pending' => '報名完成',
+                'paid' => '已付款',
+                'cancelled' => '已取消',
+            ]),
             Boolean::make('已付款', 'is_paid'),
 
             Text::make('銀行代碼', 'bank_code'),
             Text::make('銀行帳號', 'bank_account'),
             Text::make('轉帳備註', 'bank_comment')->hideFromIndex(),
 
-            DateTime::make('付款時間', 'paid_at')->hideFromIndex(),
+            DateTime::make('付款時間', 'paid_at')->readonly()->hideFromIndex(),
 
             BelongsTo::make('團隊', 'group', Group::class)->nullable()->displayUsing(function ($group) {
                 return $group->name;

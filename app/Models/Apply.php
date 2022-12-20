@@ -17,7 +17,8 @@ class Apply extends Model {
         'bank_code',
         'bank_account',
         'bank_comment',
-        'paid_at'
+        'paid_at',
+        'status'
     ];
 
     protected $casts = [
@@ -27,6 +28,11 @@ class Apply extends Model {
 
     public function getIsPaidAttribute(): bool {
         return $this->paid_at !== null;
+    }
+
+    public function setIsPaidAttribute(): void {
+        $this->paid_at = now();
+        $this->status = 'paid';
     }
 
     public function camp_time(): BelongsTo {
