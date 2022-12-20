@@ -35,9 +35,7 @@ class Apply extends Resource {
      *
      * @var array
      */
-    public static $search = [
-        'id',
-    ];
+    public static $search = [];
 
     /**
      * Get the fields displayed by the resource.
