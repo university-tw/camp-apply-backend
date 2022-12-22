@@ -55,7 +55,7 @@ class CampApplyNotice extends Notification
             ->line("請使用： (" . $this->apply->bank_code . ")" . $this->apply->bank_account . " 轉帳")
             ->line("轉帳至： (" . $this->apply->camp_time->camp->bank_accounts->first()->code . ")" . $this->apply->camp_time->camp->bank_accounts->first()->account)
             ->line("繳費金額： " . $this->apply->offer->price)
-            ->line("轉帳附註請加上這串ID " . Str::substr($this->apply->id, Str::length($this->apply->id) - 6, 5))
+            ->line("轉帳附註請加上這串ID： " . Str::substr($this->apply->id, Str::length($this->apply->id) - 6, 5))
             ->line('')
             ->line('再次感謝您使用營隊報名平台');
 
