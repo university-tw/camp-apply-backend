@@ -20,6 +20,10 @@ class Offer extends Model
         'unlock_code'
     ];
 
+    protected $appends = [
+        'locked'
+    ];
+
     protected $hidden = [
         'unlock_code'
     ];
@@ -28,11 +32,18 @@ class Offer extends Model
         'priceValidUntil' => 'datetime',
     ];
 
-    public function camp(): BelongsTo {
+    public function getLockedAttribute(): bool
+    {
+        return $this->unlock_code !== null;
+    }
+
+    public function camp(): BelongsTo
+    {
         return $this->belongsTo(Camp::class);
     }
 
-    public function applies() : HasMany {
+    public function applies(): HasMany
+    {
         return $this->hasMany(Apply::class);
     }
 }
