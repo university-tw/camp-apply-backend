@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\SetCancelled;
 use App\Nova\Filters\ApplyType;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -117,6 +118,8 @@ class Apply extends Resource {
      * @return array
      */
     public function actions(NovaRequest $request) {
-        return [];
+        return [
+            SetCancelled::make()
+        ];
     }
 }
