@@ -43,6 +43,8 @@ class StoreApplyRequest extends FormRequest {
             'offer_id' => 'required|exists:App\Models\Offer,id',
             'camp_id' => 'required|exists:App\Models\Camp,id',
             'camp_time' => 'required|exists:App\Models\CampTime,id',
+
+            'unlock_code' => 'nullable|string'
         ];
     }
 }

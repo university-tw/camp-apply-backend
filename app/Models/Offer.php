@@ -16,7 +16,12 @@ class Offer extends Model
         'name',
         'description',
         'priceValidUntil',
-        'limit'
+        'limit',
+        'unlock_code'
+    ];
+
+    protected $hidden = [
+        'unlock_code'
     ];
 
     protected $casts = [

@@ -86,6 +86,12 @@ class ApplyController extends Controller
             }
         }
 
+        if ($offer->unlock_code) {
+            if (Str::upper($offer->unlock_code ) != Str::upper($request->unlock_code)) {
+                abort(400, '活動密碼錯誤');
+            }
+        }
+
         $apply->save();
         CampApply::dispatch($user, $apply);
         return \response()->json([
