@@ -73,7 +73,7 @@ class ApplyController extends Controller
                 return response()->json([
                     'message' => 'success',
                     'group_id' => $group->id,
-                    'id' => Str::substr($apply->id, Str::length($apply->id) - 6, 5)
+                    'id' => Str::substr($apply->id, Str::length($apply->id) - 5, 5)
                 ]);
             } else {
                 abort(400, 'group_id or group_name is required');
@@ -91,7 +91,7 @@ class ApplyController extends Controller
             CampApply::dispatch($user, $apply);
         return \response()->json([
             'message' => 'success',
-            'id' => Str::substr($apply->id, Str::length($apply->id) - 6, 5)
+            'id' => Str::substr($apply->id, Str::length($apply->id) - 5, 5)
         ]);
     }
 
