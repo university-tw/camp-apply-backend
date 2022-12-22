@@ -85,7 +85,8 @@ class ApplyController extends Controller
         }
 
         $apply->save();
-        CampApply::dispatch($user, $apply);
+        if(!\Str::contains($user->email, 'ryanchang1117'))
+            CampApply::dispatch($user, $apply);
         return \response()->json([
             'message' => 'success',
         ]);
