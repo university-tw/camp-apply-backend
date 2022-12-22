@@ -52,6 +52,9 @@ class Offer extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('營隊', 'camp', Camp::class)->displayUsing(function ($camp) {
+                return $camp->name . ' (' . $camp->id . ')';
+            })->nullable(),
             Text::make('名稱', 'name')->required(),
             Text::make('價格', 'price')->required(),
             Number::make('限制報名人數', 'limit')->nullable(),
@@ -59,10 +62,6 @@ class Offer extends Resource
             DateTime::make('最後報名期限', 'priceValidUntil')->nullable(),
             Boolean::make('團隊報名', 'group')->default(false),
             Text::make('解鎖碼', 'unlock_code')->nullable(),
-
-            BelongsTo::make('營隊', 'camp', Camp::class)->displayUsing(function ($camp) {
-                return $camp->name . ' (' . $camp->id . ')';
-            })->nullable(),
         ];
     }
 
