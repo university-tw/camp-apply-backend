@@ -36,7 +36,7 @@ class ApplyController extends Controller
         if (auth('sanctum')->check()) $user = auth('sanctum')->user();
         else $user = User::firstOrCreate(['email' => $request->email], [
             'email' => $request->email,
-            'password'=> bcrypt(Str::random(32)),
+            'password' => bcrypt(Str::random(32)),
         ]);
 
         $user->update($request->only([
@@ -72,7 +72,8 @@ class ApplyController extends Controller
                 $user->notify(new CampApplyNotice($apply));
                 return response()->json([
                     'message' => 'success',
-                    'group_id' => $group->id
+                    'group_id' => $group->id,
+                    'id' => Str::substr($apply->id, Str::length($apply->id) - 6, 5)
                 ]);
             } else {
                 abort(400, 'group_id or group_name is required');
@@ -86,10 +87,11 @@ class ApplyController extends Controller
         }
 
         $apply->save();
-        if(!Str::contains($user->email, 'ryanchang1117'))
+        if (!Str::contains($user->email, 'ryanchang1117'))
             CampApply::dispatch($user, $apply);
         return \response()->json([
             'message' => 'success',
+            'id' => Str::substr($apply->id, Str::length($apply->id) - 6, 5)
         ]);
     }
 

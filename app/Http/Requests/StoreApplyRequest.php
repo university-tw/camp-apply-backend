@@ -35,7 +35,7 @@ class StoreApplyRequest extends FormRequest {
 
             'bank_code' => 'required|string',
             'bank_account' => 'required|string',
-            'bank_comment' => 'required|string',
+            // 'bank_comment' => 'required|string',
 
             'group_name' => 'unique:groups,name',
             'group_id' => 'exists:groups,id',
