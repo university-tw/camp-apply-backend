@@ -32,7 +32,7 @@ class ApplyController extends Controller
      */
     public function store(StoreApplyRequest $request)
     {
-        if (auth()->check()) $user = auth()->user();
+        if (auth('sanctum')->check()) $user = auth('sanctum')->user();
         else $user = User::firstOrCreate(['email' => $request->email], [
             'email' => $request->email,
             'password'=> bcrypt(\Str::random(32)),
