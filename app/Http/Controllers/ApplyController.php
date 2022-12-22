@@ -76,19 +76,19 @@ class ApplyController extends Controller
                     'id' => Str::substr($apply->id, Str::length($apply->id) - 5, 5)
                 ]);
             } else {
-                abort(400, 'group_id or group_name is required');
+                abort(422, 'group_id or group_name is required');
             }
         }
 
         if ($offer->limit) {
             if ($offer->limit <= $offer->applies()->whereNot('status', 'cancelled')->count()) {
-                abort(400, '人數已滿');
+                abort(422, '人數已滿');
             }
         }
 
         if ($offer->unlock_code) {
             if (Str::upper($offer->unlock_code ) != Str::upper($request->unlock_code)) {
-                abort(400, '活動密碼錯誤');
+                abort(422, '活動密碼錯誤');
             }
         }
 
