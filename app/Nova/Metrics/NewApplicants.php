@@ -14,9 +14,7 @@ class NewApplicants extends Value {
      * @return mixed
      */
     public function calculate(NovaRequest $request) {
-        return $this->count($request, Apply::class, function ($query) {
-            return $query->whereNot('status', 'cancelled');
-        });
+        return $this->count($request, Apply::class);
     }
 
     /**
