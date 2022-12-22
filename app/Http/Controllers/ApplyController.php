@@ -11,6 +11,7 @@ use App\Models\Offer;
 use App\Models\User;
 use App\Notifications\CampApplyNotice;
 use Illuminate\Http\Response;
+use Str;
 
 class ApplyController extends Controller
 {
@@ -35,8 +36,8 @@ class ApplyController extends Controller
         if (auth('sanctum')->check()) $user = auth('sanctum')->user();
         else $user = User::firstOrCreate(['email' => $request->email], [
             'email' => $request->email,
-            'password'=> bcrypt(\Str::random(32)),
-        ])->first();
+            'password'=> bcrypt(Str::random(32)),
+        ]);
 
         $user->update($request->only([
             'name',
@@ -79,13 +80,13 @@ class ApplyController extends Controller
         }
 
         if ($offer->limit) {
-            if ($offer->limit <= $offer->applies()->count()) {
+            if ($offer->limit <= $offer->applies()->whereNot('status', 'cancelled')->count()) {
                 abort(400, '人數已滿');
             }
         }
 
         $apply->save();
-        if(!\Str::contains($user->email, 'ryanchang1117'))
+        if(!Str::contains($user->email, 'ryanchang1117'))
             CampApply::dispatch($user, $apply);
         return \response()->json([
             'message' => 'success',
