@@ -49,6 +49,7 @@ class ApplyController extends Controller
         ]));
 
         $offer = Offer::find($request->offer_id);
+        if($offer->camp_id != $request->camp_id) abort(422, "方案與營隊不符");
 
         $apply = new Apply();
         $apply->user_id = $user->id;
