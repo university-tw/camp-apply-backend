@@ -12,13 +12,15 @@ use App\Models\User;
 use App\Notifications\CampApplyNotice;
 use Illuminate\Http\Response;
 
-class ApplyController extends Controller {
+class ApplyController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         abort(403);
     }
 
@@ -28,8 +30,15 @@ class ApplyController extends Controller {
      * @param \App\Http\Requests\StoreApplyRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreApplyRequest $request) {
-        auth()->user()->update($request->only([
+    public function store(StoreApplyRequest $request)
+    {
+        if (auth()->check()) $user = auth()->user();
+        else $user = User::firstOrCreate(['email' => $request->email], [
+            'email' => $request->email,
+            'password'=> bcrypt(\Str::random(32)),
+            ])->first();
+
+        $user->update($request->only([
             'name',
             'tw_id',
             'phone',
@@ -41,7 +50,7 @@ class ApplyController extends Controller {
         $offer = Offer::find($request->offer_id);
 
         $apply = new Apply();
-        $apply->user_id = auth()->user()->id;
+        $apply->user_id = $user->id;
         $apply->camp_time()->associate($request->camp_time);
         $apply->offer()->associate($request->offer_id);
         $apply->data = $request->data ?? [];
@@ -59,7 +68,7 @@ class ApplyController extends Controller {
                 $group->save();
                 $apply->group()->associate($group->id);
                 $apply->save();
-                auth()->user()->notify(new CampApplyNotice($apply));
+                $user->notify(new CampApplyNotice($apply));
                 return response()->json([
                     'message' => 'success',
                     'group_id' => $group->id
@@ -76,7 +85,7 @@ class ApplyController extends Controller {
         }
 
         $apply->save();
-        CampApply::dispatch(auth()->user(), $apply);
+        CampApply::dispatch($user, $apply);
         return \response()->json([
             'message' => 'success',
         ]);
@@ -89,7 +98,8 @@ class ApplyController extends Controller {
      * @param Apply $apply
      * @return void
      */
-    public function show(Apply $apply) {
+    public function show(Apply $apply)
+    {
         //
     }
 
@@ -100,7 +110,8 @@ class ApplyController extends Controller {
      * @param Apply $apply
      * @return void
      */
-    public function update(UpdateApplyRequest $request, Apply $apply) {
+    public function update(UpdateApplyRequest $request, Apply $apply)
+    {
         //
     }
 
@@ -110,7 +121,8 @@ class ApplyController extends Controller {
      * @param Apply $apply
      * @return void
      */
-    public function destroy(Apply $apply) {
+    public function destroy(Apply $apply)
+    {
         //
     }
 }

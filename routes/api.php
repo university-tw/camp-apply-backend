@@ -26,7 +26,7 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 
-Route::post('/apply', [ApplyController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/apply', [ApplyController::class, 'store']); # ->middleware('auth:sanctum');
 
 Route::prefix('info')->group(function () {
     Route::get('/camp/{camp}', function (\App\Models\Camp $camp) {
