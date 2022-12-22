@@ -58,6 +58,7 @@ class Offer extends Resource
             Textarea::make('描述', 'description')->nullable(),
             DateTime::make('最後報名期限', 'priceValidUntil')->nullable(),
             Boolean::make('團隊報名', 'group')->default(false),
+            Text::make('解鎖碼', 'unlock_code')->nullable(),
 
             BelongsTo::make('營隊', 'camp', Camp::class),
         ];
