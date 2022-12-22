@@ -22,7 +22,7 @@ class StoreApplyRequest extends FormRequest {
     public function rules(): array {
         return [
             'name' => 'nullable|string',
-            //'email' => 'required|email',
+            'email' => 'required|email',
 
             'tw_id' => 'required|tw_id',
 

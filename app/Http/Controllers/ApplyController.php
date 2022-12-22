@@ -36,7 +36,7 @@ class ApplyController extends Controller
         else $user = User::firstOrCreate(['email' => $request->email], [
             'email' => $request->email,
             'password'=> bcrypt(\Str::random(32)),
-            ])->first();
+        ])->first();
 
         $user->update($request->only([
             'name',
