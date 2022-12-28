@@ -28,7 +28,7 @@ class SetCancelled extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
-            (new Apply($model))->update([
+            $model->update([
                 'status' => 'cancelled',
             ]);
         }
