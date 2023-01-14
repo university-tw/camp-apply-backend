@@ -36,6 +36,7 @@ class ApplyController extends Controller
         if (auth('sanctum')->check()) $user = auth('sanctum')->user();
         else $user = User::firstOrCreate(['email' => $request->email], [
             'email' => $request->email,
+            'name' => $request->name,
             'password' => bcrypt(Str::random(32)),
         ]);
 
